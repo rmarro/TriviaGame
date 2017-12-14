@@ -17,15 +17,18 @@
 var questionList = [ 
     {
       question: "What is the right answer?",
-      options: ["some answer", "another answer", "third answer", "last answer"]
+      options: ["some answer", "another answer", "third answer", "last answer"],
+      rightAnswer: 0
     },
     {
         question: "What is the right answer2?",
-        options: ["some answer2", "another answer2", "third answer2", "last answer2"]
+        options: ["some answer2", "another answer2", "third answer2", "last answer2"],
+        rightAnswer: 1
       },
       {
         question: "What is the right answer3?",
-        options: ["some answer3", "another answer3", "third answer3", "last answer3"]
+        options: ["some answer3", "another answer3", "third answer3", "last answer3"],
+        rightAnswer: 2
       }
     ]
     
@@ -45,7 +48,7 @@ showQuestion();
 // Show the options from qSet
 function showOptions() {
     for (var i = 0; i < qSet.options.length; i++) {
-    var currentOptions = $("<div class='option'>");
+    var currentOptions = $("<button class='option'>");
     currentOptions.attr("value", i)
     currentOptions.text(qSet.options[i]);
     $("#question-full").append(currentOptions);
@@ -53,6 +56,13 @@ function showOptions() {
 }
 showOptions();
 
-// onclick .option if this.val = qSet.rightAnswer // checks if correct answer was selected
+// Checks if correct answer was clicked by comparing value attribute (option index) to correctAnswer (correct option index)
+$(".option").on("click", function() {
+    if (+$(this).val() === qSet.rightAnswer) {
+        console.log("correct");
+    } else {
+        console.log("incorrect");
+    }
+})
 
 // $("#question-full").empty(); //empties out div-- can use when showing answer and final page

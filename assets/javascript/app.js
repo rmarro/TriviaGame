@@ -1,5 +1,5 @@
 // Press start
-// Start timer counting down from 30
+// Start timer counting down from 20
 // A question shows up
 // 4 possible options show up
 // If right answer is clicked
@@ -19,18 +19,18 @@
 
 var questionList = [ 
     {
-        question: "What is the right answer?",
-        options: ["some answer", "another answer", "third answer", "last answer"],
+        question: "What is the right answer1?",
+        options: ["right answer1", "second answer1", "third answer1", "fourth answer1"],
         rightAnswer: 0
     },
     {
         question: "What is the right answer2?",
-        options: ["some answer2", "another answer2", "third answer2", "last answer2"],
+        options: ["first answer2", "right answer2", "third answer2", "fourth answer2"],
         rightAnswer: 1
       },
       {
         question: "What is the right answer3?",
-        options: ["some answer3", "another answer3", "third answer3", "last answer3"],
+        options: ["first answer3", "second answer3", "right answer3", "fourth answer3"],
         rightAnswer: 2
       }
     ];
@@ -38,13 +38,13 @@ var questionList = [
 var qSet;
 var round = 0;
 var countdown;
-var wrong = 0;
 var right = 0;
+var wrong = 0;
 var unanswered = 0;
 
-// 30 second timer
+// 20 second timer
 function timer () {
-    timeLeft = 30;
+    timeLeft = 20;
     $("#timer").text("Seconds left: " + timeLeft);
     countdown = setInterval(showTime, 1000);
 
@@ -52,6 +52,7 @@ function timer () {
         $("#timer").text("Seconds left: " + timeLeft);
         // if time runs out, show answer and start 4 second timer
         if (timeLeft === 0) {
+            unanswered++;
             clearInterval(countdown);
             $("#question-full").empty();
             showAnswer();
@@ -89,9 +90,36 @@ function showAnswer () {
     var currentAnswer = $("<div>");
     currentAnswer.text("Correct answer: " + qSet.options[qSet.rightAnswer]);
     $("#answer-full").append(currentAnswer);
+    answerTimer();
+};
+
+function roundCheck() {
+    if (round <= 4) {
+        $("#answer-full").empty();
+        $("#message").empty();
+        gameplay();
+    }
+    else {
+        $("#answer-full").empty();
+        $("#message").empty();
+        showSummary()
+    }
 }
 
-// show round, set timer, get random question set, show question and options, handle click responses
+// 4 second timer on answer screen 
+function answerTimer () {
+    setTimeout(roundCheck, 4000)
+}
+
+// Show summary screen
+function showSummary () {
+    $("#answer-full").empty;
+    $("#right").text("Number right: " + right);
+    $("#wrong").text("Number wrong: " + wrong);
+    $("#unanswered").text("Number unanswered: " + unanswered);
+}
+
+// GAMEPLAY: show round, set timer, get random question set, show question and options, handle click responses
 function gameplay() {
     round++;
     $("#rounds").text("Round " + round + " of 5");
@@ -107,10 +135,12 @@ function gameplay() {
         showAnswer();
         //if right
         if (+$(this).val() === qSet.rightAnswer) {
+            right++;
             $("#message").text("You got it!")
         } 
         //if wrong
         else {
+            wrong++;
             $("#message").text("Nope!")
         }
     })
@@ -120,7 +150,7 @@ function gameplay() {
 gameplay();
 
 // ~~~~~~ TO DO: ~~~~~~~
-// make a 5 second countdown function that calls gameplay again at the 
+// make a 4 second countdown function that calls gameplay again at the 
     // end of it until round 5 is done, then it shows the final page and
-        // call this in the gameplay onclick AND the showTime function if 0
+        // call this in the show answer function?
 // make a reset that happens when page loads AND when someone clicks play again on final page

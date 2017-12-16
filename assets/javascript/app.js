@@ -95,13 +95,9 @@ function showAnswer () {
 
 function roundCheck() {
     if (round <= 4) {
-        $("#answer-full").empty();
-        $("#message").empty();
         gameplay();
     }
     else {
-        $("#answer-full").empty();
-        $("#message").empty();
         showSummary()
     }
 }
@@ -121,6 +117,8 @@ function showSummary () {
 
 // GAMEPLAY: show round, set timer, get random question set, show question and options, handle click responses
 function gameplay() {
+    $("#answer-full").empty();
+    $("#message").empty();
     round++;
     $("#rounds").text("Round " + round + " of 5");
     timer();
@@ -150,7 +148,11 @@ function gameplay() {
 gameplay();
 
 // ~~~~~~ TO DO: ~~~~~~~
-// make a 4 second countdown function that calls gameplay again at the 
-    // end of it until round 5 is done, then it shows the final page and
-        // call this in the show answer function?
+// FIX MESSAGE ERROR
+    // i think the issue is that sometimes an answer is being made as a new div and
+    // other times an existing div is being edited. if a new div is being made, empty()
+    // won't work on the parent div i don't think.
+    // need to make new divs in html and change js make divs to .text OR
+    // add id to new divs and change empty() to the new divs that are made
+    
 // make a reset that happens when page loads AND when someone clicks play again on final page

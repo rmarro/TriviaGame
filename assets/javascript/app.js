@@ -50,6 +50,7 @@ function timer () {
 
     function showTime() {
         $("#timer").text("Seconds left: " + timeLeft);
+        // if time runs out, show answer and start 4 second timer
         if (timeLeft === 0) {
             clearInterval(countdown);
             $("#question-full").empty();
@@ -60,12 +61,9 @@ function timer () {
     };
 };
 
-
-// Get a random question/answer set from list
+// Get a random question/answer set from list and save as qSet
 function getqSet() {
-    // Randomly select one of the indexes in questionList
     var qIndex = Math.floor(Math.random()*questionList.length);
-    // Save the object with that index as qSet
     qSet = questionList[qIndex];
 }
 
@@ -93,7 +91,7 @@ function showAnswer () {
     $("#answer-full").append(currentAnswer);
 }
 
-// set timer, show
+// show round, set timer, get random question set, show question and options, handle click responses
 function gameplay() {
     round++;
     $("#rounds").text("Round " + round + " of 5");
@@ -121,7 +119,8 @@ function gameplay() {
 
 gameplay();
 
-
+// ~~~~~~ TO DO: ~~~~~~~
 // make a 5 second countdown function that calls gameplay again at the 
-// end of it until round 5 is done, then it shows the final page and
-// call this in the gameplay onclick AND the showTime function if 0
+    // end of it until round 5 is done, then it shows the final page and
+        // call this in the gameplay onclick AND the showTime function if 0
+// make a reset that happens when page loads AND when someone clicks play again on final page

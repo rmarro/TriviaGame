@@ -94,6 +94,8 @@ function showAnswer () {
 };
 
 function roundCheck() {
+    $("#answer-full").empty();
+    $("#message").empty();
     if (round <= 4) {
         gameplay();
     }
@@ -109,7 +111,9 @@ function answerTimer () {
 
 // Show summary screen
 function showSummary () {
-    $("#answer-full").empty;
+    $("#rounds").empty();
+    $("#timer").empty();
+    $("#answer-full").empty();
     $("#right").text("Number right: " + right);
     $("#wrong").text("Number wrong: " + wrong);
     $("#unanswered").text("Number unanswered: " + unanswered);
@@ -117,8 +121,8 @@ function showSummary () {
 
 // GAMEPLAY: show round, set timer, get random question set, show question and options, handle click responses
 function gameplay() {
-    $("#answer-full").empty();
-    $("#message").empty();
+    // $("#answer-full").empty();
+    // $("#message").empty();
     round++;
     $("#rounds").text("Round " + round + " of 5");
     timer();
@@ -131,6 +135,7 @@ function gameplay() {
         clearInterval(countdown);
         $("#question-full").empty();
         showAnswer();
+        
         //if right
         if (+$(this).val() === qSet.rightAnswer) {
             right++;
@@ -140,7 +145,8 @@ function gameplay() {
         else {
             wrong++;
             $("#message").text("Nope!")
-        }
+        };
+        
     })
 };
 
@@ -148,11 +154,7 @@ function gameplay() {
 gameplay();
 
 // ~~~~~~ TO DO: ~~~~~~~
-// FIX MESSAGE ERROR
-    // i think the issue is that sometimes an answer is being made as a new div and
-    // other times an existing div is being edited. if a new div is being made, empty()
-    // won't work on the parent div i don't think.
-    // need to make new divs in html and change js make divs to .text OR
-    // add id to new divs and change empty() to the new divs that are made
-    
-// make a reset that happens when page loads AND when someone clicks play again on final page
+// make "play" button when page loads
+// make "play again" button on final page
+// make a reset that happens when someone clicks play or play again on final page
+    // reset will 0 stuff and then gameplay()

@@ -3,19 +3,20 @@
 // A question shows up
 // 4 possible options show up
 // If right answer is clicked
-    // 5 second timer starts
+    // 4 second timer starts
     // You got it right, show picture, correct++
 // If wrong answer is clicked
-    // 5 second timer starts
+    // 4 second timer starts
     // You got it wrong, show correct answer, show picture, wrong++
 // If time runs out
-    // 5 second timer starts
+    // 4 second timer starts
     // You ran out of time, show correct answer, show picture, unanswered++
-// When 5 second timer runs out 
-    // 30 second timer starts again
+// When 4 second timer runs out 
+    // 20 second timer starts again
     // new question and options are shown
     // round++
-// When 5 rounds have been completed, show final summary screen
+// When 5 rounds have been completed, show final summary screen instead
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 var questionList = [ 
     {
@@ -36,11 +37,30 @@ var questionList = [
     ];
 
 var qSet;
-var round = 0;
+var round;
 var countdown;
-var right = 0;
-var wrong = 0;
-var unanswered = 0;
+var right;
+var wrong;
+var unanswered;
+
+
+window.onload = function() {
+    $("#summary-full").hide()
+};
+
+//Play and play again buttons reset and start gameplay
+$(".reset").on("click", reset);
+
+function reset() {
+    $("#play").hide();
+    $("#summary-full").hide();
+    round = 0;
+    right = 0;
+    wrong = 0;
+    unanswered = 0;
+    gameplay();
+};
+
 
 // 20 second timer
 function timer () {
@@ -50,6 +70,7 @@ function timer () {
 
     function showTime() {
         $("#timer").text("Seconds left: " + timeLeft);
+
         // if time runs out, show answer and start 4 second timer
         if (timeLeft === 0) {
             unanswered++;
@@ -66,26 +87,27 @@ function timer () {
 function getqSet() {
     var qIndex = Math.floor(Math.random()*questionList.length);
     qSet = questionList[qIndex];
-}
+};
 
 // Show the question from randomly selected qSet
 function showQuestion() {
     var currentQuestion = $("<div>");
     currentQuestion.text(qSet.question);
     $("#question-full").append(currentQuestion);
-}
+};
 
 // Show the options from qSet
 function showOptions() {
     for (var i = 0; i < qSet.options.length; i++) {
-    var currentOptions = $("<button class='option'>");
-    currentOptions.attr("value", i)
-    currentOptions.text(qSet.options[i]);
-    $("#question-full").append(currentOptions);
+        var currentOptions = $("<button class='option btn btn-block'>");
+        // make index number the value attribute
+        currentOptions.attr("value", i)
+        currentOptions.text(qSet.options[i]);
+        $("#question-full").append(currentOptions);
     }
-}
+};
 
-// Show the correct answer from qSet // ADD PICTURE!!
+// Show the correct answer from qSet and start 4 second timer // ADD PICTURE!!
 function showAnswer () {
     var currentAnswer = $("<div>");
     currentAnswer.text("Correct answer: " + qSet.options[qSet.rightAnswer]);
@@ -93,6 +115,12 @@ function showAnswer () {
     answerTimer();
 };
 
+// 4 second timer on answer screen 
+function answerTimer () {
+    setTimeout(roundCheck, 4000)
+};
+
+// Check which round it is and start another round or go to summary screen if round 5 is done
 function roundCheck() {
     $("#answer-full").empty();
     $("#message").empty();
@@ -102,15 +130,11 @@ function roundCheck() {
     else {
         showSummary()
     }
-}
-
-// 4 second timer on answer screen 
-function answerTimer () {
-    setTimeout(roundCheck, 4000)
-}
+};
 
 // Show summary screen
 function showSummary () {
+    $("#summary-full").show();
     $("#rounds").empty();
     $("#timer").empty();
     $("#answer-full").empty();
@@ -121,8 +145,6 @@ function showSummary () {
 
 // GAMEPLAY: show round, set timer, get random question set, show question and options, handle click responses
 function gameplay() {
-    // $("#answer-full").empty();
-    // $("#message").empty();
     round++;
     $("#rounds").text("Round " + round + " of 5");
     timer();
@@ -145,16 +167,7 @@ function gameplay() {
         else {
             wrong++;
             $("#message").text("Nope!")
-        };
+        }
         
     })
 };
-
-
-gameplay();
-
-// ~~~~~~ TO DO: ~~~~~~~
-// make "play" button when page loads
-// make "play again" button on final page
-// make a reset that happens when someone clicks play or play again on final page
-    // reset will 0 stuff and then gameplay()

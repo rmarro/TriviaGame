@@ -1,0 +1,12 @@
+.panel-body, .panel-heading {
+    text-align: center;
+    font-size: 20px;
+}
+
+.btn {
+    font-size: 20px
+}
+
+.panel-body {
+    height: 241px;
+}

@@ -53,6 +53,7 @@ $(".reset").on("click", reset);
 
 function reset() {
     $("#play").hide();
+    $("#title").hide();
     $("#summary-full").hide();
     round = 0;
     right = 0;
@@ -134,6 +135,7 @@ function roundCheck() {
 
 // Show summary screen
 function showSummary () {
+    $("#title").show();
     $("#summary-full").show();
     $("#rounds").empty();
     $("#timer").empty();

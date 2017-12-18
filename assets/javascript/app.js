@@ -44,26 +44,26 @@ var questionList = [
         options: ["Dan Ryan", "Kennedy", "Stevenson", "Eisenhower"],
         rightAnswer: 0
       },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
+      {
+        question: "Which street runs at 3200W?",
+        options: ["Western", "Pulaski", "Ashland", "Kedzie"],
+        rightAnswer: 3
+      },
+      {
+        question: "Which neighborhood is directly south of South Shore?",
+        options: ["Grand Crossing", "South Chicago", "Chatham", "Roseland"],
+        rightAnswer: 1
+      },
+      {
+        question: "What is the address of Cermak Road?",
+        options: ["1200S", "3100S", "2200S", "3900S"],
+        rightAnswer: 2
+      },
+      {
+        question: "Which of the following is NOT part of the Boulevard system?",
+        options: ["Garfield", "Marquette", "Pershing", "Western"],
+        rightAnswer: 2
+      },
     //   {
     //     question: "?",
     //     options: ["", "", "", ""],

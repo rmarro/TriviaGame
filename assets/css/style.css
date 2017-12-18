@@ -15,7 +15,7 @@
 }
 
 .panel-body {
-    height: 270px;
+    height: 330px;
     font-size: 20px;
     text-align: center;
     font-family: 'Nunito', sans-serif;
@@ -30,17 +30,24 @@
     font-weight: 700;
 }
 
+#lastline {
+    margin-top: 15px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
 .panel-body .btn-block {
-    margin-top: 8px;
+    margin-top: 18px;
 }
 
 .panel-body .reset {
     margin-top: 15px;
+    font-size: 23px;
 }
 
 .panel-body .btn-lg {
     font-size: 35px;
-    margin-top: 50px;
+    margin-top: 60px;
     
 }
 
@@ -69,4 +76,8 @@
 
 .panel-default {
     border-color: #84838385;
+}
+
+#answer-full img {
+    max-height: 230px;
 }

@@ -15,27 +15,88 @@
     // 20 second timer starts again
     // new question and options are shown
     // round++
-// When 5 rounds have been completed, show final summary screen instead
+// When 6 rounds have been completed, show final summary screen instead
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 var questionList = [ 
     {
-        question: "What is the right answer1?",
-        options: ["right answer1", "second answer1", "third answer1", "fourth answer1"],
-        rightAnswer: 0
+        question: "Which neighborhood is directly north of Little Village?",
+        options: ["Pilsen", "Austin", "Archer Heights", "North Lawndale"],
+        rightAnswer: 3
     },
     {
-        question: "What is the right answer2?",
-        options: ["first answer2", "right answer2", "third answer2", "fourth answer2"],
+        question: "Which of the following does NOT run on the West Side?",
+        options: ["Brown Line", "Green Line", "Pink Line", "Blue Line"],
+        rightAnswer: 0
+      },
+      {
+        question: "Which streets intersect at (0, 0) in Chicago's grid system?",
+        options: ["Michigan and Madison", "State and Madison", "Michigan and Jackson", "State and Jackson"],
         rightAnswer: 1
       },
       {
-        question: "What is the right answer3?",
-        options: ["first answer3", "second answer3", "right answer3", "fourth answer3"],
+        question: "Which street runs at 800W?",
+        options: ["Ashland", "Damen", "Halsted", "Western"],
         rightAnswer: 2
-      }
+      },
+      {
+        question: "What is I-90/94 called south of the Circle?",
+        options: ["Dan Ryan", "Kennedy", "Stevenson", "Eisenhower"],
+        rightAnswer: 0
+      },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
+    //   {
+    //     question: "?",
+    //     options: ["", "", "", ""],
+    //     rightAnswer: 
+    //   },
     ];
 
+var qIndex;
 var qSet;
 var round;
 var countdown;
@@ -86,7 +147,7 @@ function timer () {
 
 // Get a random question/answer set from list and save as qSet
 function getqSet() {
-    var qIndex = Math.floor(Math.random()*questionList.length);
+    qIndex = Math.floor(Math.random()*questionList.length);
     qSet = questionList[qIndex];
 };
 
@@ -113,6 +174,8 @@ function showAnswer () {
     var currentAnswer = $("<div>");
     currentAnswer.text("Correct answer: " + qSet.options[qSet.rightAnswer]);
     $("#answer-full").append(currentAnswer);
+    var currentPicture = $("<img src=assets/images/" + qIndex + ".PNG>")
+    $("#answer-full").append(currentPicture);
     answerTimer();
 };
 
@@ -121,11 +184,11 @@ function answerTimer () {
     setTimeout(roundCheck, 4000)
 };
 
-// Check which round it is and start another round or go to summary screen if round 5 is done
+// Check which round it is and start another round or go to summary screen if round 6 is done
 function roundCheck() {
     $("#answer-full").empty();
     $("#message").empty();
-    if (round <= 4) {
+    if (round <= 5) {
         gameplay();
     }
     else {
@@ -143,12 +206,19 @@ function showSummary () {
     $("#right").text("Number right: " + right);
     $("#wrong").text("Number wrong: " + wrong);
     $("#unanswered").text("Number unanswered: " + unanswered);
+    if (right <= 2) {
+        $("#lastline").text("You new around here? :)")
+    } else if (right <= 4) {
+        $("#lastline").text("Not too bad!")
+    } else {
+        $("#lastline").text("Impressive, you're a Chicago expert!")
+    }
 }
 
 // GAMEPLAY: show round, set timer, get random question set, show question and options, handle click responses
 function gameplay() {
     round++;
-    $("#rounds").text("Round " + round + " of 5");
+    $("#rounds").text("Round " + round + " of 6");
     timer();
     getqSet();
     showQuestion();

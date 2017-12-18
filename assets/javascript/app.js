@@ -4,7 +4,7 @@
 // 4 possible options show up
 // If right answer is clicked
     // 4 second timer starts
-    // You got it right, show picture, correct++
+    // You got it right, show correct answer, show picture, correct++
 // If wrong answer is clicked
     // 4 second timer starts
     // You got it wrong, show correct answer, show picture, wrong++
@@ -16,6 +16,7 @@
     // new question and options are shown
     // round++
 // When 6 rounds have been completed, show final summary screen instead
+    // Update last line based on score (0-2, 3-4, 5-6)
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 var questionList = [ 
@@ -64,36 +65,36 @@ var questionList = [
         options: ["Garfield", "Marquette", "Pershing", "Western"],
         rightAnswer: 2
       },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
-    //   {
-    //     question: "?",
-    //     options: ["", "", "", ""],
-    //     rightAnswer: 
-    //   },
+      {
+        question: "The 323-acre Marquette Park is in which Community Area?",
+        options: ["Chicago Lawn", "Gage Park", "Englewood", "New City"],
+        rightAnswer: 0
+      },
+      {
+        question: "Which of these is NOT a stop on the Red Line?",
+        options: ["Thorndale", "Fullerton", "47th", "35th Bronzeville IIT"],
+        rightAnswer: 3
+      },
+      {
+        question: "Which of these is NOT one of Chicago's diagonal streets?",
+        options: ["Archer", "Roosevelt", "Blue Island", "Ridge"],
+        rightAnswer: 1
+      },
+      {
+        question: "What is the name of the location where the North, South, and Main branches of the Chicago River come together?",
+        options: ["Wolf Point", "Tri Coast", "Michigan Canal", "Goose Island"],
+        rightAnswer: 0 
+      },
+      {
+        question: "How long is the Lakefront Trail?",
+        options: ["29 miles", "24.5 miles", "18 miles", "15.5 miles"],
+        rightAnswer: 2
+      },
+      {
+        question: "How many Industrial Corridors are in Chicago?",
+        options: ["9", "13", "20", "26"],
+        rightAnswer: 3
+      },
     ];
 
 var qIndex;
@@ -169,7 +170,7 @@ function showOptions() {
     }
 };
 
-// Show the correct answer from qSet and start 4 second timer // ADD PICTURE!!
+// Show the correct answer and picture from qSet and start 4 second timer
 function showAnswer () {
     var currentAnswer = $("<div>");
     currentAnswer.text("Correct answer: " + qSet.options[qSet.rightAnswer]);
@@ -211,7 +212,7 @@ function showSummary () {
     } else if (right <= 4) {
         $("#lastline").text("Not too bad!")
     } else {
-        $("#lastline").text("Impressive, you're a Chicago expert!")
+        $("#lastline").text("You're a Chicago expert!")
     }
 }
 

@@ -1,7 +1,8 @@
-.body {
-    line-height: 2;
+body {
+    background-image: url(../images/map3.PNG);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
-
 
 .panel-default .panel-heading {
     height: 131px;
@@ -15,7 +16,7 @@
 }
 
 .panel-body {
-    height: 330px;
+    height: 340px;
     font-size: 20px;
     text-align: center;
     font-family: 'Nunito', sans-serif;
@@ -79,5 +80,5 @@
 }
 
 #answer-full img {
-    max-height: 230px;
+    max-height: 235px;
 }

@@ -98,6 +98,7 @@ var questionList = [
     ];
 
 var qIndex;
+var alreadyChosen = [];
 var qSet;
 var round;
 var countdown;
@@ -117,6 +118,7 @@ function reset() {
     $("#play").hide();
     $("#title").hide();
     $("#summary-full").hide();
+    alreadyChosen = [];
     round = 0;
     right = 0;
     wrong = 0;
@@ -149,7 +151,15 @@ function timer () {
 // Get a random question/answer set from list and save as qSet
 function getqSet() {
     qIndex = Math.floor(Math.random()*questionList.length);
-    qSet = questionList[qIndex];
+    // If it hasn't already been chosen this round, select it
+    // and add index to alreadyChosen list,
+    if (alreadyChosen.indexOf(qIndex) === -1) {
+        alreadyChosen.push(qIndex);
+        qSet = questionList[qIndex]
+    // otherwise choose a different number
+    } else {
+        getqSet();
+    } 
 };
 
 // Show the question from randomly selected qSet
@@ -185,7 +195,8 @@ function answerTimer () {
     setTimeout(roundCheck, 4000)
 };
 
-// Check which round it is and start another round or go to summary screen if round 6 is done
+// Check which round it is and start another round or go to summary 
+// screen if round 6 is done
 function roundCheck() {
     $("#answer-full").empty();
     $("#message").empty();
@@ -216,7 +227,8 @@ function showSummary () {
     }
 }
 
-// GAMEPLAY: show round, set timer, get random question set, show question and options, handle click responses
+// GAMEPLAY: show round, set timer, get random question set, show 
+// question and options, handle click responses
 function gameplay() {
     round++;
     $("#rounds").text("Round " + round + " of 6");
@@ -225,7 +237,8 @@ function gameplay() {
     showQuestion();
     showOptions();
   
-  // Checks if correct answer was clicked by comparing value attribute (option index) to correctAnswer (correct option index)
+  // Checks if correct answer was clicked by comparing value attribute 
+  // (option index) to correctAnswer (correct option index)
     $(".option").on("click", function() {
         clearInterval(countdown);
         $("#question-full").empty();
